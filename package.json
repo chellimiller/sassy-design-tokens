@@ -4,7 +4,9 @@
   "description": "Sass library for using and accessing design tokens.",
   "main": "index.scss",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd demo && npm start",
+    "build": "node ./scripts/build.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/chellimiller/sassy-design-tokens/issues"
   },
-  "homepage": "https://github.com/chellimiller/sassy-design-tokens#readme"
+  "homepage": "https://github.com/chellimiller/sassy-design-tokens#readme",
+  "peerDependencies": {
+    "sass": "^1.49.0"
+  }
 }
