@@ -1,0 +1,22 @@
+{
+  "name": "sassy-design-tokens",
+  "version": "0.1.0",
+  "description": "Sass library for using and accessing design tokens.",
+  "main": "index.scss",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chellimiller/sassy-design-tokens.git"
+  },
+  "author": {
+    "name": "Michelle Miller",
+    "url": "https://github.com/chellimiller"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chellimiller/sassy-design-tokens/issues"
+  },
+  "homepage": "https://github.com/chellimiller/sassy-design-tokens#readme"
+}
