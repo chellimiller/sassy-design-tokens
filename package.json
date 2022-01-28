@@ -1,6 +1,6 @@
 {
   "name": "sassy-design-tokens",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Sass library for using and accessing design tokens.",
   "main": "index.scss",
   "scripts": {
@@ -23,5 +23,8 @@
   "homepage": "https://github.com/chellimiller/sassy-design-tokens#readme",
   "peerDependencies": {
     "sass": "^1.49.0"
+  },
+  "devDependencies": {
+    "csstype": "^3.0.10"
   }
 }

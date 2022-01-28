@@ -1,0 +1,56 @@
+@use "sass:map" as map;
+@use "sass:string" as string;
+
+$tokens: () !default;
+
+/// Get the token value for the specific `$key`
+/// @param {string} $key - Token key
+/// @todo Add check to verify token exists
+/// @return Value of the token
+@function token($key) {
+  @return map.get($tokens, $key);
+}
+
+/// Flatten map of tokens
+/// @param {map} $nested-tokens - Map of tokens that may or may not be nested
+/// @todo Add check to verify token exists
+/// @return Value of the token
+@function flat-tokens($nested-tokens) {
+  $flat-tokens: ();
+
+  @each $key, $value in $nested-tokens {
+    @if (type-of($value) == "map") {
+      $child-tokens: flat-tokens($value);
+      @each $child-key, $child-value in $child-tokens {
+        $flat-key: "#{string.unquote($key)}-#{string.unquote($child-key)}";
+        $flat-tokens: map.set($flat-tokens, $flat-key, $child-value);
+      }
+    } @else {
+      $flat-tokens: map.set($flat-tokens, $key, $value);
+    }
+  }
+
+  @return $flat-tokens;
+}
+
+/// Include CSS variables for the token values.
+/// @todo Add ability to filter tokens
+/// @todo Accept unflattened tokens
+@mixin tokens($token-map: $tokens) {
+  $flat-tokens: flat-tokens($token-map);
+
+  @each $key, $value in $flat-tokens {
+    --#{string.unquote($key)}: #{$value};
+  }
+}
+
+/// Include the token as the value for the CSS property.
+/// Use the CSS variable but fallback to the token value.
+/// @param {string} $css-property - CSS property to set
+/// @param {string} $token - Key for the token
+/// @todo Add type checking for token property
+/// @output Token value set to CSS property
+@mixin css-property-with-token($css-property, $token) {
+  #{string.unquote($css-property)}: #{token($token)};
+  #{string.unquote($css-property)}: var(--#{string.unquote($token)});
+}

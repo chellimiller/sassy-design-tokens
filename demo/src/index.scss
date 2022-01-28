@@ -1,4 +1,16 @@
-@use "../../src/index.scss";
+@import "../../src/index.scss";
+
+$tokens: flat-tokens(
+  (
+    "color": (
+      "blue": green,
+    ),
+  )
+);
+
+:root {
+  @include tokens();
+}
 
 body {
   margin: 0;
@@ -12,4 +24,5 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+  @include css-property-with-token(color, "color-blue");
 }
