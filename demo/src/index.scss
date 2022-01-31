@@ -1,28 +1,21 @@
-@import "../../src/index.scss";
+@use "./theme.scss" as *;
 
-$tokens: flat-tokens(
-  (
-    "color": (
-      "blue": green,
-    ),
-  )
-);
-
-:root {
-  @include tokens();
-}
+@include root-variables();
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  @include background-color("color-background-app");
+  @include font-family("font-family");
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-  @include color("color-blue");
+  @include font-family("font-family-mono");
+  @include color("color-primary");
+}
+
+a {
+  @include color("color-primary");
+
+  &:hover {
+    @include color("color-primary-light");
+  }
 }

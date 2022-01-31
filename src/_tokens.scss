@@ -3,12 +3,34 @@
 
 $tokens: () !default;
 
-/// Get the token value for the specific `$key`
+/// Determine a safe `$unsafe-token-key` value that exists.
+/// If there is no token, then "`$unsafe-token-key`-default" will be attempted.
+/// @param {string} $unsafe-token-key - Token key that may or may not exist.
+/// @todo Add support for prefixes
+/// @return Safe token key that is verified to exist.
+@function safe-token-key($unsafe-token-key) {
+  @if (map.has-key($tokens, $unsafe-token-key)) {
+    // Exists as is, so nothing needs to be done.
+    @return $unsafe-token-key;
+  }
+
+  $default-key: "#{$unsafe-token-key}-default";
+  @if (map.has-key($tokens, $default-key)) {
+    @return $default-key;
+  }
+
+  @error "$tokens does not contain key '#{$unsafe-token-key}' or '#{$default-key}'\n$tokens: #{$tokens}";
+}
+
+/// Get the token value for the specific `$key`.
+/// If there is no token, then "`$key`-default" will be attempted.
+/// An error will be thrown if neither exists.
 /// @param {string} $key - Token key
-/// @todo Add check to verify token exists
 /// @return Value of the token
 @function token($key) {
-  @return map.get($tokens, $key);
+  // If the key has already been made safe before this is called,
+  //  then safe-token-key will return `$key` on the first if-condition.
+  @return map.get($tokens, safe-token-key($key));
 }
 
 /// Flatten map of tokens
@@ -35,7 +57,6 @@ $tokens: () !default;
 
 /// Include CSS variables for the token values.
 /// @todo Add ability to filter tokens
-/// @todo Accept unflattened tokens
 @mixin tokens($token-map: $tokens) {
   $flat-tokens: flat-tokens($token-map);
 
@@ -48,9 +69,17 @@ $tokens: () !default;
 /// Use the CSS variable but fallback to the token value.
 /// @param {string} $css-property - CSS property to set
 /// @param {string} $token - Key for the token
-/// @todo Add type checking for token property
+/// @todo Allow prefix to be specified
 /// @output Token value set to CSS property
 @mixin css-property-with-token($css-property, $token) {
-  #{string.unquote($css-property)}: #{token($token)};
-  #{string.unquote($css-property)}: var(--#{string.unquote($token)});
+  // We want to get the safe token ahead of time
+  // This is so that we call the correct CSS variable
+  $safe-token-key: safe-token-key($token);
+  $value: token($safe-token-key);
+
+  #{string.unquote($css-property)}: #{$value};
+  #{string.unquote($css-property)}: var(
+    --#{string.unquote($safe-token-key)},
+    #{$value}
+  );
 }

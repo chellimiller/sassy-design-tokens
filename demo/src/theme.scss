@@ -1,0 +1,57 @@
+@import "../../dist/index.scss";
+
+$tokens: flat-tokens(
+  (
+    "color": (
+      "background": (
+        "app": #333,
+      ),
+      "primary": (
+        "light": #db94b8,
+        "default": #cc6699,
+        "dark": #c05386,
+        "050": #f9edf3,
+        "100": #f0d1e0,
+        "200": #e6b3cc,
+        "300": #db94b8,
+        "400": #d47da8,
+        "500": #cc6699,
+        "600": #c75e91,
+        "700": #c05386,
+        "800": #b9497c,
+        "900": #ad386b,
+        "contrast": (
+          "light": #000,
+          "default": #000,
+          "dark": #fff,
+          "050": #000,
+          "100": #000,
+          "200": #000,
+          "300": #000,
+          "400": #000,
+          "500": #000,
+          "600": #000,
+          "700": #fff,
+          "800": #fff,
+          "900": #fff,
+        ),
+      ),
+    ),
+    "font": (
+      "family": (
+        "default": (
+          "'Roboto'",
+          "'Helvetica Neue'",
+          sans-serif,
+        ),
+        "mono": monospace,
+      ),
+    ),
+  )
+);
+
+@mixin root-variables() {
+  :root {
+    @include tokens();
+  }
+}
