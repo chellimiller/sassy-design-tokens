@@ -1,25 +1,51 @@
 @use "sass:map" as map;
+@use "sass:list" as list;
 @use "sass:string" as string;
 
 $tokens: () !default;
 
 /// Determine a safe `$unsafe-token-key` value that exists.
-/// If there is no token, then "`$unsafe-token-key`-default" will be attempted.
+/// If there is no token, then `$allow-prefix` and `$allow-suffix` values will be used.
+/// Prefix and suffix will be added with `dash-case`.
 /// @param {string} $unsafe-token-key - Token key that may or may not exist.
-/// @todo Add support for prefixes
+/// @param {string} $allow-prefix [null] - Allowable prefix to try if key does not exist.
+/// @param {string} $allow-suffix ["default"] - Allowable suffix to try if key does not exist.
+/// @todo Add support for multiple allowable prefixes and suffixes
 /// @return Safe token key that is verified to exist.
-@function safe-token-key($unsafe-token-key) {
+@function safe-token-key(
+  $unsafe-token-key,
+  $allow-prefix: null,
+  $allow-suffix: "default"
+) {
   @if (map.has-key($tokens, $unsafe-token-key)) {
     // Exists as is, so nothing needs to be done.
     @return $unsafe-token-key;
   }
 
-  $default-key: "#{$unsafe-token-key}-default";
-  @if (map.has-key($tokens, $default-key)) {
-    @return $default-key;
+  $alt-keys: ();
+
+  @if ($allow-prefix != null) {
+    $prefix-key: "#{$allow-prefix}-#{$unsafe-token-key}";
+    $alt-keys: list.append($alt-keys, $prefix-key);
+
+    @if ($allow-suffix != null) {
+      $prefix-suffix-key: "#{$prefix-key}-#{$allow-suffix}";
+      $alt-keys: list.append($alt-keys, $prefix-suffix-key);
+    }
   }
 
-  @error "$tokens does not contain key '#{$unsafe-token-key}' or '#{$default-key}'\n$tokens: #{$tokens}";
+  @if ($allow-suffix != null) {
+    $suffix-key: "#{$unsafe-token-key}-#{$allow-suffix}";
+    $alt-keys: list.append($alt-keys, $suffix-key);
+  }
+
+  @each $alt-key in $alt-keys {
+    @if (map.has-key($tokens, $alt-key)) {
+      @return $alt-key;
+    }
+  }
+
+  @error "$tokens does not contain key '#{$unsafe-token-key}' or any of #{$alt-keys}\n$tokens: #{$tokens}";
 }
 
 /// Get the token value for the specific `$key`.
@@ -69,12 +95,14 @@ $tokens: () !default;
 /// Use the CSS variable but fallback to the token value.
 /// @param {string} $css-property - CSS property to set
 /// @param {string} $token - Key for the token
-/// @todo Allow prefix to be specified
 /// @output Token value set to CSS property
 @mixin css-property-with-token($css-property, $token) {
   // We want to get the safe token ahead of time
   // This is so that we call the correct CSS variable
-  $safe-token-key: safe-token-key($token);
+  $safe-token-key: safe-token-key(
+    $unsafe-token-key: $token,
+    $allow-prefix: $css-property,
+  );
   $value: token($safe-token-key);
 
   #{string.unquote($css-property)}: #{$value};

@@ -4,7 +4,7 @@
 
 body {
   @include background-color("color-background-app");
-  @include font-family("font-family");
+  @include font-family;
 }
 
 code {
@@ -13,7 +13,7 @@ code {
 }
 
 a {
-  @include color("color-primary");
+  @include color("primary");
 
   &:hover {
     @include color("color-primary-light");

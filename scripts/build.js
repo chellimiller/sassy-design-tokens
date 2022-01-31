@@ -39,6 +39,7 @@ function writePackageJson(source, destination) {
     bugs,
     homepage,
     peerDependencies,
+    keywords,
   } = require(path.join(source, 'package.json'));
 
   const contents =  JSON.stringify({
@@ -52,6 +53,7 @@ function writePackageJson(source, destination) {
     bugs,
     homepage,
     peerDependencies,
+    keywords,
   }, null, 2);
 
   fs.writeFileSync(path.join(destination, 'package.json'), contents);

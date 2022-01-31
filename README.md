@@ -16,8 +16,13 @@ This library offers the following features:
 
 ### Install
 
-- npm: `npm install sassy-design-tokens --save-dev`
-- yarn: `yarn add sassy-design-tokens --dev`
+#### Node/NPM
+
+`npm install sassy-design-tokens --save-dev`
+
+#### Yarn
+
+`yarn add sassy-design-tokens --dev`
 
 ### Configure
 

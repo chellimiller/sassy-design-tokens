@@ -40,11 +40,11 @@ function createSassMixin(property, data) {
 /// There is no type checking, so the token value must be valid for the property.
 /// @group ${group}
 /// @access public
-/// @param {string} $token - Name of token to apply to the property.
+/// @param {string} $token ["${property}"] - Name of token to apply to the property.
 /// @output CSS \`${property}\` property set to the \`$token\` value.
 /// @see ${mdn_url}
-@mixin ${property}($token) {
-  @include ${cssPropertyMixin}('${property}', $token);
+@mixin ${property}($token: "${property}") {
+  @include ${cssPropertyMixin}("${property}", $token);
 }
 `;
 }
