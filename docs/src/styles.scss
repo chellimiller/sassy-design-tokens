@@ -4,14 +4,14 @@ $text-color-light: #eeee;
 $code-background: #eae9ea;
 $item-background: #faf9fa;
 $divider-color: #8a838c;
-$header-background: #744da9;
+$primary: #744da9;
 $main-background: transparent;
 $header-shadow: (0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19));
 
 @forward 'sassy-design-tokens' with (
   $tokens: (
     'background-color-code': $code-background,
-    'background-color-header': $header-background,
+    'background-color-header': $primary,
     'background-color-item': $item-background,
     'background-color-main': $main-background,
     'border-bottom-table-cell': 0.1rem solid $divider-color,
@@ -23,6 +23,7 @@ $header-shadow: (0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19
     'color-code': $text-color,
     'color-text': $text-color,
     'color-text-light': $text-color-light,
+    'color-item-title': $primary,
     'font-family': $font-family,
     'font-family-code': monospace,
     'font-size': 1rem,

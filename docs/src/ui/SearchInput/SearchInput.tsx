@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Text from '../Text';
 import './SearchInput.scss';
 
 export type SearchInputProps = {

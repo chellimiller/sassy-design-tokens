@@ -28,7 +28,9 @@ const Item: React.FC<ItemProps> = (props) => {
 
   return (
     <section className={className}>
-      <Text as="h3">{title}</Text>
+      <Text as="h3" className="item-title">
+        {title}
+      </Text>
       <ItemDescription data={data.description} />
       <ItemParameterList data={data.parameter} />
     </section>

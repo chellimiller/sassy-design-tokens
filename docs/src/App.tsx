@@ -8,6 +8,8 @@ import Item from './ui/Item';
 import SearchInput from './ui/SearchInput';
 import Text from './ui/Text';
 
+console.log(items);
+
 type SassdocItemSearchOptions = {
   keywords?: string;
   type?: SassdocItemType;

@@ -6,4 +6,8 @@
   @include border-radius('item');
   @include margin('item');
   @include padding('item');
+
+  .item-title {
+    @include color('item-title');
+  }
 }
