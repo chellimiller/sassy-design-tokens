@@ -15,19 +15,33 @@ const ItemParameterList: React.FC<ItemParameterListProps> = (props) => {
       <table>
         <thead>
           <tr>
-            <Text as="th">Name</Text>
-            <Text as="th">Description</Text>
-            <Text as="th">Type</Text>
-            <Text as="th">Default Value</Text>
+            <Text as="th" className="name">
+              Name
+            </Text>
+            <Text as="th" className="description">
+              Description
+            </Text>
+            <Text as="th" className="type">
+              Type
+            </Text>
+            <Text as="th" className="default">
+              Default Value
+            </Text>
           </tr>
         </thead>
         <tbody>
           {data.map((parameter: SassdocItemParameter) => (
             <tr key={parameter.name}>
-              <Text as="td">`${parameter.name}`</Text>
-              <Text as="td">{parameter.description}</Text>
-              <Text as="td">`{parameter.type}`</Text>
-              <Text as="td">`{parameter.default}`</Text>
+              <td className="name">
+                <Text>`${parameter.name}`</Text>
+              </td>
+              <td className="description">
+                <Text>{parameter.description}</Text>
+              </td>
+              <td className="type">
+                <Text>`{parameter.type}`</Text>
+              </td>
+              <td className="default">{parameter.default && <Text>`{parameter.default}`</Text>}</td>
             </tr>
           ))}
         </tbody>

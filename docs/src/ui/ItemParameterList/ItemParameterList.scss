@@ -1,9 +1,36 @@
 @use '../../styles.scss' as *;
 
 .parameters {
-  th,
-  td {
+  table {
+    border-spacing: 0;
+    display: block;
+    overflow-x: auto;
+    text-align: left;
+    width: 100%;
+  }
+
+  td,
+  th {
+    border-bottom: 0.1rem solid grey;
+    padding: 1.2rem 1.5rem;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  th {
     min-width: 5rem;
-    text-align: center;
+  }
+
+  td > * {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
   }
 }

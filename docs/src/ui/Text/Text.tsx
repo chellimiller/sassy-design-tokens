@@ -4,6 +4,7 @@ import './Text.scss';
 export type TextProps = {
   children?: string[] | string;
   as?: React.ElementType;
+  className?: string;
 };
 
 /**
@@ -26,11 +27,12 @@ function formatCodeSnippets(original: string | string[]): React.ReactNode[] {
 }
 
 const Text: React.FC<TextProps> = (props) => {
-  const { children = '', as: Component = 'span' } = props;
+  const { children = '', as: Component = 'span', className: additionalClassName = '' } = props;
 
   const output = React.useMemo(() => formatCodeSnippets(children), [children]);
+  const className = ['text', additionalClassName].join(' ').trim();
 
-  return <Component className="text">{output}</Component>;
+  return <Component className={className}>{output}</Component>;
 };
 
 export default Text;
