@@ -1,6 +1,10 @@
-$primary-color: white;
-$bg: black;
-h1 {
-  color: $primary-color;
-  background-color: $bg;
-}
+@forward 'sassy-design-tokens' with (
+  $tokens: (
+    'color-function': blue,
+    'color-mixin': red,
+    'color-placeholder': yellow,
+    'color-variable': green,
+    'border-width': 0.125rem,
+    'height-sassdoc-item': 15rem,
+  )
+);

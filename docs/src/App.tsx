@@ -1,14 +1,16 @@
 import * as React from 'react';
 import { hot } from 'react-hot-loader/root';
 // @ts-expect-error
-import docs from '../../src/index.scss';
+import items from '../../src/index.scss';
+import { SassdocItem } from './types/SassdocItem';
+import Item from './ui/Item';
 
 const App: React.FC = () => {
-  console.log(docs);
   return (
     <div id="app">
-      <h1>Hello</h1>
-      <pre>{JSON.stringify(docs, null, 2)}</pre>
+      {items.map((item: SassdocItem) => (
+        <Item key={`${item.context.type}-${item.context.name}`} data={item} />
+      ))}
     </div>
   );
 };
