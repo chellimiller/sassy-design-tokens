@@ -1,1 +1,52 @@
 @use '../../styles.scss' as *;
+
+@mixin code-snippet {
+  @include background-color('code');
+  @include border-radius('code');
+  @include color('code');
+  @include font-family('code');
+  @include font-weight('code');
+  @include padding-left('padding-code');
+  @include padding-right('padding-code');
+}
+
+.text {
+  @include font-family;
+  @include font-weight;
+  @include font-size;
+
+  @at-root h1#{&} {
+    @include font-weight('h1');
+    @include font-size('h1');
+  }
+
+  @at-root h2#{&} {
+    @include font-weight('h2');
+    @include font-size('h2');
+  }
+
+  @at-root h3#{&} {
+    @include font-weight('h3');
+    @include font-size('h3');
+  }
+
+  @at-root h4#{&} {
+    @include font-weight('h4');
+    @include font-size('h4');
+  }
+
+  @at-root th#{&} {
+    @include font-weight('th');
+    @include font-size('th');
+  }
+
+  @at-root code#{&},
+    pre#{&} {
+    @include code-snippet;
+  }
+
+  code,
+  pre {
+    @include code-snippet;
+  }
+}

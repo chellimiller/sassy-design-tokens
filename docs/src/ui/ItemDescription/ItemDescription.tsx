@@ -12,9 +12,9 @@ const ItemDescription: React.FC<ItemDescriptionProps> = (props) => {
 
   return (
     <div className="description">
-      <h4>Description</h4>
+      <Text as="h4">Description</Text>
       {paragraphs.map((text) => (
-        <Text key={text} paragraph>
+        <Text key={text} as="p">
           {text}
         </Text>
       ))}

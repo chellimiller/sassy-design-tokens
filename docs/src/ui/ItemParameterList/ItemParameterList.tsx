@@ -10,36 +10,24 @@ export type ItemParameterListProps = {
 const ItemParameterList: React.FC<ItemParameterListProps> = (props) => {
   const { data = [] } = props;
   return (
-    <div className="parameter">
-      <h4>Parameters</h4>
+    <div className="parameters">
+      <Text as="h4">Parameters</Text>
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Type</th>
-            <th>Default Value</th>
+            <Text as="th">Name</Text>
+            <Text as="th">Description</Text>
+            <Text as="th">Type</Text>
+            <Text as="th">Default Value</Text>
           </tr>
         </thead>
         <tbody>
           {data.map((parameter: SassdocItemParameter) => (
             <tr key={parameter.name}>
-              <td>
-                {/* <Text>{parameter.name}</Text> */}
-                {parameter.name}
-              </td>
-              <th>
-                {/* <Text>{parameter.description}</Text> */}
-                {parameter.description}
-              </th>
-              <th>
-                {/* <Text>{parameter.type}</Text> */}
-                {parameter.type}
-              </th>
-              <th>
-                {/* <Text>{parameter.default}</Text> */}
-                {parameter.default}
-              </th>
+              <Text as="td">`${parameter.name}`</Text>
+              <Text as="td">{parameter.description}</Text>
+              <Text as="td">`{parameter.type}`</Text>
+              <Text as="td">`{parameter.default}`</Text>
             </tr>
           ))}
         </tbody>

@@ -2,8 +2,8 @@ import * as React from 'react';
 import './Text.scss';
 
 export type TextProps = {
-  children?: string;
-  paragraph?: boolean;
+  children?: string[] | string;
+  as?: React.ElementType;
 };
 
 /**
@@ -11,9 +11,9 @@ export type TextProps = {
  * @param original
  * @returns
  */
-function formatCodeSnippets(original: string): React.ReactNode[] {
+function formatCodeSnippets(original: string | string[]): React.ReactNode[] {
   const result: React.ReactNode[] = [];
-  const pieces: string[] = original.split('`');
+  const pieces: string[] = typeof original === 'string' ? original.split('`') : original.join('').split('`');
 
   pieces.forEach((piece, index) => {
     const isCode = !!(index % 2);
@@ -26,12 +26,11 @@ function formatCodeSnippets(original: string): React.ReactNode[] {
 }
 
 const Text: React.FC<TextProps> = (props) => {
-  const { children = '', paragraph } = props;
+  const { children = '', as: Component = 'span' } = props;
 
   const output = React.useMemo(() => formatCodeSnippets(children), [children]);
 
-  if (paragraph) return <p className="text">{output}</p>;
-  return <span className="text">{output}</span>;
+  return <Component className="text">{output}</Component>;
 };
 
 export default Text;
