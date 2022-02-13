@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { hot } from 'react-hot-loader/root';
+import './App.scss';
 // @ts-expect-error
 import items from '../../src/index.scss';
 import { SassdocItem, SassdocItemType } from './types/SassdocItem';
 import Item from './ui/Item';
+import SearchInput from './ui/SearchInput';
+import Text from './ui/Text';
 
 type SassdocItemSearchOptions = {
   keywords?: string;
@@ -24,8 +27,8 @@ const App: React.FC = () => {
   const displayedItems = React.useMemo(() => getDisplayItems(search), [search]);
 
   const doSetKeywords = React.useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setSearch((prev) => ({ ...prev, keywords: event.target.value }));
+    (_event: any, keywords: string) => {
+      setSearch((prev) => ({ ...prev, keywords }));
     },
     [setSearch]
   );
@@ -33,8 +36,10 @@ const App: React.FC = () => {
   return (
     <div id="app">
       <header>
-        <label htmlFor="search">Search</label>
-        <input name="search" type="search" onChange={doSetKeywords} value={search.keywords || ''} />
+        <Text as="h1" className="app-title">
+          sassy-design-tokens
+        </Text>
+        <SearchInput onChange={doSetKeywords} value={search.keywords} />
       </header>
       <main>
         {displayedItems.map((item) => (

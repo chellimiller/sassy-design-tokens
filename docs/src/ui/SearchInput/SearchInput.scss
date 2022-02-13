@@ -1,0 +1,22 @@
+@use '../../styles.scss' as *;
+
+.search-input {
+  display: flex;
+  flex-flow: row nowrap;
+
+  @include font-size('h6');
+
+  label {
+    margin-right: 0.75rem;
+  }
+
+  input {
+    font-size: 85%;
+    height: 1.75rem;
+    @include border-radius('code');
+    @include padding('code');
+    @include background-color('color-text-light');
+    outline: none;
+    border: none;
+  }
+}

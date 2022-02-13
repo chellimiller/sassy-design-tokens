@@ -1,27 +1,9 @@
 @use '../../styles.scss' as *;
 
 .item {
-  @include border-width;
-  padding: 1rem;
-  margin: 1rem;
-
-  &-function {
-    @include border-color('color-mixin');
-    background-color: rgba(token('color-mixin'), $alpha: 0.2);
-  }
-
-  &-mixin {
-    @include border-color('color-mixin');
-    background-color: rgba(token('color-mixin'), $alpha: 0.2);
-  }
-
-  &-placeholder {
-    @include border-color('color-mixin');
-    background-color: rgba(token('color-mixin'), $alpha: 0.2);
-  }
-
-  &-variable {
-    @include border-color('color-mixin');
-    background-color: rgba(token('color-mixin'), $alpha: 0.2);
-  }
+  @include background-color('item');
+  @include border('item');
+  @include border-radius('item');
+  @include margin('item');
+  @include padding('item');
 }

@@ -9,6 +9,15 @@ export type ItemParameterListProps = {
 
 const ItemParameterList: React.FC<ItemParameterListProps> = (props) => {
   const { data = [] } = props;
+  if (!data.length) {
+    return (
+      <div className="parameters">
+        <Text as="h4">Parameters</Text>
+        <Text as="p">This item does not take any parameters</Text>
+      </div>
+    );
+  }
+
   return (
     <div className="parameters">
       <Text as="h4">Parameters</Text>

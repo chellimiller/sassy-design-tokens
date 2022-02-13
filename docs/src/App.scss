@@ -1,0 +1,45 @@
+@use './styles.scss' as *;
+
+#app {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: hidden;
+  @include font-family;
+  @include font-weight;
+  @include font-size;
+  @include letter-spacing;
+  @include line-height;
+  @include color('text');
+
+  & > header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    @include background-color('header');
+    @include padding('header');
+    @include box-shadow('header');
+    @include color('text-light');
+
+    h1.app-title {
+      @include font-size('h3');
+      user-select: none;
+    }
+  }
+
+  & > main {
+    flex-grow: 1;
+    overflow: auto;
+    @include background-color('main');
+    @include padding('main');
+  }
+}

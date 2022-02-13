@@ -11,8 +11,10 @@
 
   td,
   th {
-    border-bottom: 0.1rem solid grey;
-    padding: 1.2rem 1.5rem;
+    @include border-bottom('table-cell');
+    @include padding('table-cell');
+    width: 25%;
+    box-sizing: border-box;
 
     &:first-child {
       padding-left: 0;

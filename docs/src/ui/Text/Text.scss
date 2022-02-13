@@ -1,17 +1,10 @@
 @use '../../styles.scss' as *;
 
-@mixin typography($element: '') {
-  @if ($element == '') {
-    @include font-weight;
-    @include font-size;
-    @include letter-spacing;
-    @include line-height;
-  } @else {
-    @include font-weight($element);
-    @include font-size($element);
-    @include line-height($element);
-    @include letter-spacing($element);
-  }
+@mixin typography($element) {
+  @include font-weight($element);
+  @include font-size($element);
+  @include line-height($element);
+  @include letter-spacing($element);
 }
 
 @mixin code-snippet {
@@ -24,11 +17,11 @@
 }
 
 .text {
-  @include font-family;
-  @include typography;
-  @include color('text');
-
   @at-root {
+    em#{&} {
+      font-style: italic;
+    }
+
     strong#{&},
     b#{&} {
       @include typography('bold');
@@ -98,5 +91,9 @@
   strong,
   b {
     @include typography('bold');
+  }
+
+  em {
+    font-style: italic;
   }
 }
